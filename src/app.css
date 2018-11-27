@@ -1,0 +1,13 @@
+body {
+    font-family: Verdana;
+}
+
+.screens {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.screens > *:not(:last-child) {
+    margin-bottom: 10px;
+}

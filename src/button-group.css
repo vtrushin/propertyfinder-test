@@ -1,0 +1,46 @@
+.button {
+    border: 1px solid #ccc;
+    background-color: transparent;
+    margin: 0;
+    padding: 8px 12px;
+    outline: none;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-family: Verdana;
+    font-size: 18px;
+}
+
+.button:not(._selected) {
+    cursor: pointer;
+}
+
+.button._selected {
+    background-color: #fff681;
+}
+
+.button._first {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.button._middle {
+    border-left: none;
+    border-radius: 0;
+}
+
+.button._last {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    white-space: nowrap
+}
+
+.button-group > .button + .button {
+    margin-left: -1px;
+}
+

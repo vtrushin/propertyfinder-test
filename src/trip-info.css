@@ -1,0 +1,17 @@
+.trip-info :not(:last-child) {
+    margin-right: 10px;
+}
+
+.price {
+    display: inline-block;
+}
+
+.duration {
+    display: inline-block;
+}
+
+.selected {
+    padding: .1em .3em;
+    background-color: #fff681;
+    border-radius: .2em;
+}
