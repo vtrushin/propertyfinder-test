@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "pack": "webpack",
-    "watch": "webpack --progress --watch --profile"
+    "watch": "webpack --progress --watch --profile --mode=development",
+    "production": "webpack --progress --profile --mode=production"
   },
   "author": "Vlad Trushin",
   "license": "MIT",

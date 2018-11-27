@@ -2,7 +2,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
-	mode: 'production',
 	entry: './src/index.js',
 	output: {
 		path: __dirname,
