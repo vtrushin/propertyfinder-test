@@ -2,9 +2,9 @@ import React from 'react';
 import shortestPath from './shortest-path';
 import TripInfo from './trip-info';
 import styles from './results.css';
-import busImage from './images/bus.svg';
-import carImage from './images/car.svg';
-import trainImage from './images/train.svg';
+import busImage from './images/bus-icon.svg';
+import carImage from './images/car-icon.svg';
+import trainImage from './images/train-icon.svg';
 
 const transportMap = {
     bus: {
@@ -23,7 +23,7 @@ const transportMap = {
 
 const round = num => Math.round(num * 100) / 100;
 
-const getCost = trip => trip.discount ? trip.cost - round(trip.discount / 100) * trip.cost : trip.cost;
+const getRealCost = trip => trip.discount ? trip.cost - round(trip.discount / 100) * trip.cost : trip.cost;
 
 const durationToMinutes = duration => Number(duration.h) * 60 + Number(duration.m);
 
@@ -73,13 +73,13 @@ export default class Results extends React.Component {
 
 			return duplicate ? (
 				type === 'Cheapest'
-					? getCost(trip) < getCost(duplicate)
+					? getRealCost(trip) < getRealCost(duplicate)
 					: durationToMinutes(trip.duration) <= durationToMinutes(duplicate.duration)
 			) : true;
 		});
 
 		const getter = type === 'Cheapest'
-			? trip => getCost(trip)
+			? trip => getRealCost(trip)
 			: trip => durationToMinutes(trip.duration);
 
 		const map = prepareMap(trips, getter);
@@ -108,10 +108,11 @@ export default class Results extends React.Component {
 			const trip = trips.find(trip => stops[i - 1] === trip.departure && stop === trip.arrival);
 
 			return {
-				cost: acc.cost + getCost(trip),
+				cost: acc.cost + getRealCost(trip),
+				previousCost: acc.previousCost + trip.cost,
 				duration: acc.duration + durationToMinutes(trip.duration)
 			};
-		}, { cost: 0, duration: 0 });
+		}, { cost: 0, previousCost: 0, duration: 0 });
 
 		return (
             <div className={styles.results}>
@@ -119,7 +120,7 @@ export default class Results extends React.Component {
                    	{ this.renderPath() }
                 </div>
 				<div className={styles.footer}>
-					<TripInfo type={type} cost={total.cost} duration={minutesToDuration(total.duration)} />
+					<TripInfo type={type} cost={total.cost} previousCost={total.previousCost} duration={minutesToDuration(total.duration)} />
 				</div>
             </div>
         )
@@ -160,7 +161,7 @@ export default class Results extends React.Component {
 		const trip = trips.find(trip => prevStop === trip.departure && nextStop === trip.arrival);
 		const transport = transportMap[trip.transport];
 
-        return (
+		return (
             <div key={`${prevStop}_${nextStop}`} className={styles.trip}>
 				<div
 					className={styles['transport-icon']}
@@ -173,7 +174,7 @@ export default class Results extends React.Component {
 				</div>
 				<div className={styles['trip-body']}>
 					<div className={styles['trip-body__row']}>
-						<TripInfo type={type} cost={getCost(trip)} duration={trip.duration} />
+						<TripInfo type={type} cost={getRealCost(trip)} previousCost={trip.cost} duration={trip.duration} />
 					</div>
 					<div className={styles['trip-body__row']}>
 						<div className={styles.transport}>

@@ -202,7 +202,7 @@
         "m": "15"
       },
       "cost": 40,
-      "discount": 50,
+      "discount": 0,
       "reference": "BWS0515"
     },
     {
@@ -321,7 +321,7 @@
         "h": "04",
         "m": "00"
       },
-      "cost": 120,
+      "cost": 20,
       "discount": 0,
       "reference": "CSM0400"
     },

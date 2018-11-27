@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "pack": "webpack",
-    "watch": "webpack --progress --watch --profile --mode=development",
-    "production": "webpack --progress --profile --mode=production"
+    "build": "webpack --mode=development --progress --profile",
+    "watch": "webpack --mode=development --progress --watch --profile",
+    "build:prod": "webpack --mode=production"
   },
   "author": "Vlad Trushin",
   "license": "MIT",

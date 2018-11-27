@@ -25,11 +25,18 @@ export default class TripInfo extends React.Component {
 	}
 
 	renderPrice() {
-		const { cost, type } = this.props;
+		const { cost, previousCost, type } = this.props;
 
 		return (
-			<div className={classNames(styles.price, { [styles.selected]: type === 'Cheapest' })}>
-				{ cost.toLocaleString() }&thinsp;€
+			<div className={styles.costs}>
+				<span className={classNames({ [styles.selected]: type === 'Cheapest' })}>
+					{ cost.toLocaleString() }&thinsp;€
+				</span>
+				{ previousCost && cost !== previousCost ? (
+					<span className={styles['previous-cost']}>
+						{ previousCost.toLocaleString() }&thinsp;€
+					</span>
+				) : null }
 			</div>
 		);
 	}
@@ -38,7 +45,7 @@ export default class TripInfo extends React.Component {
 		const { duration, type } = this.props;
 
 		return (
-			<div className={classNames(styles.duration, { [styles.selected]: type === 'Fastest' })}>
+			<div className={classNames({ [styles.selected]: type === 'Fastest' })}>
 				{ duration.h }&thinsp;h { duration.m }&thinsp;m
 			</div>
 		);

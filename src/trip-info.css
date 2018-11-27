@@ -1,13 +1,30 @@
-.trip-info :not(:last-child) {
-    margin-right: 10px;
+.trip-info {
+    display: flex;
+    align-items: baseline;
 }
 
-.price {
-    display: inline-block;
+.trip-info > :not(:last-child) {
+    margin-right: 1em;
 }
 
-.duration {
-    display: inline-block;
+.costs > :not(:last-child) {
+    margin-right: .4em;
+}
+
+.previous-cost {
+    position: relative;
+    font-size: 80%;
+}
+
+.previous-cost::after {
+    position: absolute;
+    content: '';
+    left: -4px;
+    top: -2px;
+    right: -4px;
+    bottom: -2px;
+    background: url('./images/line.svg') no-repeat;
+    background-size: 100% 100%;
 }
 
 .selected {
